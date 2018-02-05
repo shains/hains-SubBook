@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018, Sharon Hains. CMPUT 301. University of Alberta - All Rights Reserved. You may use, distribute, or modify this code under the terms and conditions fo the Code of Student Behaviour at the University of Alberta.
+ */
+
 package com.example.sharonhains.hains_subbook;
 
 import java.text.Format;
@@ -8,15 +12,27 @@ import java.text.SimpleDateFormat;
  * Created by Sharon Hains on 2018-01-23.
  */
 
+
+/**
+ * Represents a Subscription Object
+ * @author hains
+ * @version 1
+ */
 public class Subscription {
 
     private String name;
     private String date;
     private String comment;
     private double charge;
-    private Format format;
     private String subListString;
 
+    /**
+     * Creates a Subscription object
+     * @param name Subscription name
+     * @param charge Monthly subscription price
+     * @param comment Any user defined comment
+     * @param subdate Date of the subscription
+     */
     public Subscription (String name, double charge, String comment, String subdate){
         this.name = name;
         this.date = subdate;
@@ -24,10 +40,17 @@ public class Subscription {
         this.charge = charge;
     }
 
-    public String getName() {
-        return name;
-    }
+    /**
+     * Returns the name from the Subscription object
+     * @return name
+     */
+    public String getName()     { return name; }
 
+    /**
+     * Sets the name of the Subscription object, throws exception if length is >20 characters
+     * @param name Subscription name
+     * @throws NameTooLongException Name length too long
+     */
     public void setName(String name) throws NameTooLongException {
 
         if (name.length() > 20){
@@ -36,10 +59,17 @@ public class Subscription {
         this.name = name;
     }
 
-    public String getDate(){
-        return date;
-    }
+    /**
+     * Returns the date from the Subscription object
+     * @return date
+     */
+    public String getDate()     { return date; }
 
+    /**
+     * Sets the name of the Subscription object, throws exception if length >10
+     * @param subdate Subscription date
+     * @throws IncorrectDateException Date length too long
+     */
     public void setDate(String subdate) throws IncorrectDateException{
         if (date.length() > 10) {
             throw new IncorrectDateException();
@@ -47,39 +77,17 @@ public class Subscription {
         this.date = subdate;
     }
 
-    /*public Date getDate() {
-        return date;
-    }
+    /**
+     * Returns the comment from the Subscription object
+     * @return comment
+     */
+    public String getComment()  { return comment; }
 
-    public void setDate(Date date) throws IncorrectDateException {
-
-        format = new SimpleDateFormat("yyyy-MM-dd");
-        String stringdate = format.format(date);
-
-        if (isValidDate(stringdate) == true) {
-            this.date = date;
-        }
-        else {
-            throw new IncorrectDateException();
-        }
-    }*/
-
-    //Source http://www.java2s.com/Tutorial/Java/0120__Development/CheckifaStringisavaliddate.htm
-    public static boolean isValidDate(String inDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        try {
-            dateFormat.parse(inDate.trim());
-        } catch (ParseException pe) {
-            return false;
-        }
-        return true;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
+    /**
+     * Sets the comment of the Subscription object, throws exception if length >30
+     * @param comment Subscription comment
+     * @throws CommentTooLongException Comment length too long
+     */
     public void setComment(String comment) throws CommentTooLongException {
 
         if (comment.length() > 30){
@@ -88,10 +96,17 @@ public class Subscription {
         this.comment = comment;
     }
 
-    public double getCharge() {
-        return charge;
-    }
+    /**
+     * Returns the monthly charge from the Subscription object
+     * @return charge
+     */
+    public double getCharge()   { return charge; }
 
+    /**
+     * Sets the charge of the Subscription object, throws exception if charge < 0
+     * @param charge Subscription charge
+     * @throws NegativeValueException Negative value entered
+     */
     public void setCharge(double charge) throws NegativeValueException {
 
         if (charge < 0){
@@ -100,11 +115,14 @@ public class Subscription {
         this.charge = charge;
     }
 
-    public void totalCharge(double charge){
-        double initcharge = 0;
-    }
-
-
+    /**
+     * Creates concatenated string to be displayed as a ListIem, converts charge to String
+     * @param name Subscription name
+     * @param charge Subscription charge
+     * @param comment Subscription comment
+     * @param date Subscription date
+     * @return Returns concatenated string
+     */
     public String createSubString(String name, double charge, String comment, String date){
         String stringDouble = Double.toString(charge);
         subListString = "Subscription" + System.getProperty("line.separator")
@@ -115,11 +133,11 @@ public class Subscription {
         return subListString;
     }
 
-
+    /**
+     * Properly displays the ListItem using the concatenated SubString, converts object address
+     * @return subListString from createSubString
+     */
     @Override
-    public String toString(){
-        //createSubString(name, charge, comment, subdate);
-        return subListString;
-    }
+    public String toString()    { return subListString; }
 
 }
